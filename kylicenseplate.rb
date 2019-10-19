@@ -1,11 +1,14 @@
 require "http"
 
-previous_last_word = IO.readlines("./available_sixes.txt").last
+in_filename = './valid_words.txt'
+out_filename = './available_words.txt'
 
-File.open('./valid_words.txt', 'r') do |in_file|
-	File.open('./available_words.txt', 'a') do |out_file|
-		go_time = false
+FileUtils.touch(out_filename) unless File.exist? out_filename
+previous_last_word = IO.readlines(out_filename).last
+go_time = previous_last_word.nil? ? true : false
 
+File.open(in_filename, 'r') do |in_file|
+	File.open(out_filename, 'a') do |out_file|
 		in_file.each_line do |char|
 			if char == previous_last_word
 				go_time = true
