@@ -2,8 +2,8 @@ require "http"
 
 previous_last_word = IO.readlines("./available_sixes.txt").last
 
-File.open('./only_sixes.txt', 'r') do |in_file|
-	File.open('./available_sixes.txt', 'a') do |out_file|
+File.open('./valid_words.txt', 'r') do |in_file|
+	File.open('./available_words.txt', 'a') do |out_file|
 		go_time = false
 
 		in_file.each_line do |char|
