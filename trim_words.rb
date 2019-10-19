@@ -12,13 +12,13 @@ end
 
 File.open(in_filename, 'r') do |in_file|
 	File.open(out_filename, 'w') do |out_file|
-		in_file.each_line do |line|
-			if line == previous_last_word
+		in_file.each_line do |word|
+			if word == previous_last_word
 				go_time = true
 			elsif go_time
-				if (line.chomp.length < 7) && valid_chars?(line.chomp.upcase)
-					p line.upcase
-					out_file.write(line.upcase)
+				if (word.chomp.length < 7) && valid_chars?(word.chomp.upcase)
+					p word.upcase
+					out_file.write(word.upcase)
 				end
 			end
 		end

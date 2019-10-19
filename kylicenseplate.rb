@@ -9,14 +9,14 @@ go_time = previous_last_word.nil? ? true : false
 
 File.open(in_filename, 'r') do |in_file|
 	File.open(out_filename, 'a') do |out_file|
-		in_file.each_line do |char|
-			if char == previous_last_word
+		in_file.each_line do |word|
+			if word == previous_last_word
 				go_time = true
 			elsif go_time
-			  url = "https://secure.kentucky.gov/kytc/plates/web/LicensePlate/Verify?text=#{char.chomp}&licensePlateId=030af448-0201-471d-b561-d68376752ef6"
+			  url = "https://secure.kentucky.gov/kytc/plates/web/LicensePlate/Verify?text=#{word.chomp}&licensePlateId=030af448-0201-471d-b561-d68376752ef6"
 			  unless HTTP.get(url).to_s.include? 'not available'
-			  	p "#{char.chomp}: available!"
-					out_file.write(char)
+			  	p "#{word.chomp}: available!"
+					out_file.write(word)
 			  end
 			end
 		end
