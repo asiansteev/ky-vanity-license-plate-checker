@@ -1,5 +1,12 @@
+require 'open-uri'
+
 in_filename = './words.txt'
 out_filename = './valid_words.txt'
+
+unless File.exist? in_filename
+	download = open('https://github.com/dwyl/english-words/raw/master/words.txt')
+	IO.copy_stream(download, in_filename)
+end
 
 FileUtils.touch(out_filename) unless File.exist? out_filename
 previous_last_word = IO.readlines(out_filename).last
